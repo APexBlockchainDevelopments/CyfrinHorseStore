@@ -16,7 +16,7 @@ contract HorseStoreTestV1 is Base_TestV1 {
     }
 
     function testStoreAndReadHorseNumberHuff() public {
-        uint256 numberOfHorses = 77;
+        uint256 numberOfHorses = 777;
         horseStoreHuff.updateHorseNumber(numberOfHorses);
         assertEq(horseStoreHuff.readNumberOfHorses(), numberOfHorses);
     }

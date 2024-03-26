@@ -1,25 +1,23 @@
-// Try this in the playground! https://www.evm.codes/playground
-
 object "HorseStoreYul" {
-     code {
-        // Contract deployment
+    code {
+        //Contract Deployment
         datacopy(0, dataoffset("runtime"), datasize("runtime"))
         return(0, datasize("runtime"))
-     }
-     object "runtime" {
+    }
+    object "runtime" {
         code {
-            // The MAIN function of the contract, function dispatcher
+            //function dispatcher
             switch selector()
-            // cast sig "updateHorseNumber(uint256)"
+            //updateHourseNubmer (uint256)
             case 0xcdfead2e {
                 storeNumber(decodeAsUint(0))
             }
-            // cast sig "readNumberOfHorses()"
+            //read number of Horses
             case 0xe026c017{
                 returnUint(readNumber())
             }
-            default {
-                revert(0, 0)
+            default{
+                revert(0,0)
             }
 
             function storeNumber(newNumber) {
@@ -36,9 +34,9 @@ object "HorseStoreYul" {
             }
 
             function decodeAsUint(offset) -> v {
-                let pos := add(4, mul(offset, 0x20))
-                if lt(calldatasize(), add(pos, 0x20)) {
-                    revert(0, 0)
+                 let pos := add(4, mul(offset, 0x20))
+                if lt(calldatasize(), add(pos, 0x20)){
+                    revert (0,0)
                 }
                 v := calldataload(pos)
             }
@@ -48,5 +46,5 @@ object "HorseStoreYul" {
                 return(0, 0x20)
             }
         }
-     }
+    }
 }
